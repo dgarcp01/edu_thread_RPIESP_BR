@@ -1,0 +1,6 @@
+name: esp-env
+channels:
+  - defaults
+dependencies:
+  - python=3.10.13
+  - pip=23.3.1

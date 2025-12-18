@@ -1,0 +1,56 @@
+# =========================
+# Build y archivos generados
+# =========================
+*build/
+*sdkconfig
+*sdkconfig.old
+*sdkconfig.defaults
+
+# =========================
+# ESP-IDF / herramientas
+# =========================
+*dependencies.lock
+*managed_components/
+.espressif/
+*idf_tools.py
+
+# =========================
+# Python / Conda
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+conda-meta/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+*.code-workspace
+
+# =========================
+# CMake
+# =========================
+*CMakeFiles/
+*CMakeCache.txt
+*cmake_install.cmake
+*compile_commands.json
+
+# =========================
+# Logs y temporales
+# =========================
+*.log
+*.tmp
+*.swp
+*.bak
+
+# =========================
+# SO
+# =========================
+.DS_Store
+Thumbs.db
+
+
+hello_world
