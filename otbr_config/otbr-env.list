@@ -1,0 +1,9 @@
+OT_RCP_DEVICE=spinel+hdlc+uart:///dev/ttyACM0?uart-baudrate=>
+OT_INFRA_IF=wlan0
+OT_THREAD_IF=wpan0
+OT_LOG_LEVEL=7
+OTBR_WEB=1
+OTBR_REST=1
+FIREWALL=0
+NAT64=0
+DNS64=0
