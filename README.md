@@ -113,17 +113,9 @@ Se transfiere el programa:
 idf.py -p /dev/tty.XXXXX  flash
 ```
 
-UNA VEZ CARGADO SE CONECTA LA RPI AL ESP MEDIANTE SU PUERTO USB-C DENOMINADO UART (NO USB!)
+***UNA VEZ CARGADO SE CONECTA LA RPI AL ESP MEDIANTE SU PUERTO USB-C DENOMINADO UART (NO USB!)***
 
-## Configuración del host (RPI)
-La configuración como host viene descrita en la página oficial de openthread:
-https://openthread.io/guides/border-router/prepare?hl=es-419
-
-Lo primero actualizo la RPI:
-```
-sudo apt-get update
-sudo apt-get upgrade
-```
+## Gestión de contenedores docker con portainer
 
 El stack de thread se configurará en la raspberry como un contenedor docker. Para gestionar los contenedores se empleará Portainer.
 
@@ -139,6 +131,16 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /va
 Una vez levantado el contenedor, los contenedores de la RPI se gestionarán desde:
 ```https://192.x.x.x:9443```
 
+
+## Configuración del host (RPI)
+La configuración como host viene descrita en la página oficial de openthread:
+https://openthread.io/guides/border-router/prepare?hl=es-419
+
+Lo primero actualizo la RPI:
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
 
 
 
@@ -166,7 +168,7 @@ NAT64=0
 DNS64=0
 ```
 
-OJO: Hay que cambiar el baudrate a 460800, que es el baudrate que espressif pone por defecto en el ejemplo de RCP.
+**OJO: Hay que cambiar el baudrate a 460800, que es el baudrate que espressif pone por defecto en el ejemplo de RCP.**
 
 La configuración del baudrate del rcp se puede ver en el archivo: ```esp_ot_config.h```
 
@@ -181,17 +183,20 @@ listen_port = 80
 ```
 
 
-Se ejcuta el contenedor:
+Se ejcuta el contenedor con la imagen ```openthread/border-router```:
 
 ```
 docker run --name=otbr --detach --network=host --cap-add=NET_ADMIN --device=/dev/ttyACM0 --device=/dev/net/tun --volume=/var/lib/otbr:/data --volume=./otbr_config/:/etc/otbr --env-file=./otbr_config/otbr-env.list --restart=always openthread/border-router
 ```
 
-Con la imagen openthread/otbr:
+Con la imagen ```openthread/otbr```:
 
 ```
-docker run --name=otbr --detach --network=host --cap-add=NET_ADMIN --device=/dev/ttyACM0 --device=/dev/net/tun --volume=/var/lib/otbr:/data --volume=./otbr_config/:/etc/otbr --env-file=./otbr_config/otbr-env.list --restart=always openthread/otbr
+docker run --name=otbr --detach --network=host --cap-add=NET_ADMIN --device=/dev/ttyACM0 --device=/dev/net/tun --volume=/var/lib/otbr:/data --volume=./otbr_config/:/etc/otbr --volume /dev/ttyACM0:/dev/ttyUSB0 --env-file=./otbr_config/otbr-env.list --restart=always openthread/otbr
 ```
+
+En este contenedor se añade el volumen ```/dev/tty.ACM0``` en la carpeta ```/dev/tty.USB0```. Esto se debe a que la imagen *openthread/otbr* toma por defecto los datos de la radio de *tty.USB0* en vez de en *tty.ACM0*.
+
 
 
 Si todo va bien deberíamos ver algo así en los logs:
