@@ -239,10 +239,23 @@ Después podemos acceder a la configuración desde el navegador con la ruta:
 localhost:7586
 ```
 
+## Creación de la malla y monitorización de la red
+Para crear la red ....
+https://medium.com/engineering-iot/thread-networking-deep-dive-routing-translation-and-mesh-optimization-584d686f9645 
+
+
 ## Referencias
 
 Encuentro la siguiente información de interés
 
+
+- Documentación oficial de openthread sobre el BR: 
+
 - Blog de Medium: https://medium.com/engineering-iot/building-your-own-thread-border-router-a-complete-diy-guide-8b308d27aa64 
 
 - Repo del blog: https://github.com/psmgeelen/diythreadrouter?tab=readme-ov-file 
+
+- Creación, commisioning y monitorizaciónd de la red Thread: https://medium.com/engineering-iot/thread-networking-deep-dive-routing-translation-and-mesh-optimization-584d686f9645 
+
+- Sobre la integración del BR con Home Assistants: https://medium.com/engineering-iot/why-you-cant-use-your-own-openthread-border-router-with-google-apple-or-amazon-b413b6b0ab9e 
+
